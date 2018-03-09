@@ -1,0 +1,85 @@
+// SELECT * FROM tarifs WHERE Categorie = smartphone
+using MongoDB.Bson;
+using MongoDB.Driver;
+using System;
+using System.Threading.Tasks;
+
+namespace MongoDBQuery
+{
+    class Program
+    {
+        static async Task _Main()
+        {
+            
+            IMongoClient client = new MongoClient("mongodb://host:port/");
+            IMongoDatabase database = client.GetDatabase("cbien");
+            IMongoCollection<BsonDocument> collection = database.GetCollection<BsonDocument>("tarifs");
+            
+            // Created with Studio 3T, the IDE for MongoDB - https://studio3t.com/
+            
+            BsonDocument filter = new BsonDocument();
+            filter.Add("Categorie", "smartphone");
+            
+            using (var cursor = await collection.FindAsync(filter))
+            {
+                while (await cursor.MoveNextAsync())
+                {
+                    var batch = cursor.Current;
+                    foreach (BsonDocument document in batch)
+                    {
+                        Console.WriteLine(document.ToJson());
+                    }
+                }
+            }
+        }
+        
+        static void Main(string[] args)
+        {
+            _Main().Wait();
+        }
+    }
+}
+
+
+
+
+// SELECT * FROM tarifs
+using MongoDB.Bson;
+using MongoDB.Driver;
+using System;
+using System.Threading.Tasks;
+
+namespace MongoDBQuery
+{
+    class Program
+    {
+        static async Task _Main()
+        {
+            
+            IMongoClient client = new MongoClient("mongodb://host:port/");
+            IMongoDatabase database = client.GetDatabase("cbien");
+            IMongoCollection<BsonDocument> collection = database.GetCollection<BsonDocument>("tarifs");
+            
+            // Created with Studio 3T, the IDE for MongoDB - https://studio3t.com/
+            
+            BsonDocument filter = new BsonDocument();
+            
+            using (var cursor = await collection.FindAsync(filter))
+            {
+                while (await cursor.MoveNextAsync())
+                {
+                    var batch = cursor.Current;
+                    foreach (BsonDocument document in batch)
+                    {
+                        Console.WriteLine(document.ToJson());
+                    }
+                }
+            }
+        }
+        
+        static void Main(string[] args)
+        {
+            _Main().Wait();
+        }
+    }
+}
