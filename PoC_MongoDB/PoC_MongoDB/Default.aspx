@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Masterpage.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="PoC_MongoDB.Default" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Masterpage.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="PoC_MongoDB.Default" Async="true" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
 </asp:Content>
@@ -28,12 +28,24 @@
                     <span class="label-input100">Objet à assurer *</span>
                     <div>
 
-                        <asp:DropDownList ID="ddlcategorie" runat="server" class="js-select2" name="service">
+                        <asp:DropDownList ID="ddlcategorie" runat="server" class="js-select2" name="service" AutoPostBack="true" OnSelectedIndexChanged="ddlcategorie_SelectedIndexChanged">
                         </asp:DropDownList>
 
                         <div class="dropDownSelect2"></div>
                     </div>
                 </div>
+
+                  <div class="wrap-input100 input100-select bg1">
+                    <span class="label-input100">valeur</span>
+                    <div>
+
+                        <asp:TextBox ID="txtValeur" runat="server"  TextMode="MultiLine" Width="100%"/>
+
+                        <div class="dropDownSelect2"></div>
+                    </div>
+                </div>
+
+
                 <div class="container-contact100-form-btn">
                     <button class="contact100-form-btn">
                         <span>Envoyer
