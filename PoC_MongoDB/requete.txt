@@ -1,3 +1,23 @@
+
+
+db.categorie.aggregate([
+   {
+     $lookup:
+       {
+         from: "tarifs",
+         localField: "SousCategorie.id",
+         foreignField: "fk_categorie",
+         as: "inventory_docs"
+       }
+  },
+  {
+      $match: { "SousCategorie.id": 1 }
+   }
+])
+
+
+
+
 // SELECT * FROM tarifs WHERE Categorie = smartphone
 using MongoDB.Bson;
 using MongoDB.Driver;

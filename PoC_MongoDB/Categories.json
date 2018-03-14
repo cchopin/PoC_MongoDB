@@ -1,0 +1,92 @@
+db.categories.insert(
+{  "Categorie": "smartphone",  "Plafond":  1000, "Libelle" : "Téléphonie", "SousCategorie": 
+		[
+			{   "id" : 1 , "SousCategorieLibelle": " 100-300 ",   "ValeurMin":  100,   "ValeurMax": 300, "Franchise" : 50 },
+			{   "id" : 2 , "SousCategorieLibelle": " 300-500 ",   "ValeurMin":  300,   "ValeurMax": 500, "Franchise" : 70 },
+			{   "id" : 3 , "SousCategorieLibelle": " 500-750 ",   "ValeurMin":  500,   "ValeurMax": 750, "Franchise" : 90 },
+			{   "id" : 4 , "SousCategorieLibelle": " 750-1000 ",   "ValeurMin":  750, "Franchise" : 120 } 
+		]
+},
+
+{  "Categorie": "tablette",  "Plafond":  1000, "Libelle" : "Tablette",   "SousCategorie": 
+		[
+			{   "id" : 5 , "SousCategorieLibelle": "100-300",   "ValeurMin":  100,   "ValeurMax": 300, "Franchise" : 50 },
+			{   "id" : 6 , "SousCategorieLibelle": "300-500",   "ValeurMin":  300,   "ValeurMax": 500, "Franchise" : 70 },
+			{   "id" : 7 , "SousCategorieLibelle": "500-750",   "ValeurMin":  500,   "ValeurMax": 750, "Franchise" : 90 },
+			{   "id" : 8 , "SousCategorieLibelle": "750-1000",   "ValeurMin":  750, "Franchise" : 120 } 
+		]
+},
+
+{  "Categorie": "enceinte",  "Plafond":  1200, "Libelle" : "Enceinte",   "SousCategorie": 
+		[
+			{   "id" : 9 , "SousCategorieLibelle": "100-300",   "ValeurMin":  100,   "ValeurMax": 300, "Franchise" : 50 },
+			{   "id" : 10 , "SousCategorieLibelle": "300-600",   "ValeurMin":  300,   "ValeurMax": 600, "Franchise" : 70 },
+			{   "id" : 11 , "SousCategorieLibelle": "600-900",   "ValeurMin":  600,   "ValeurMax": 900, "Franchise" : 90 },
+			{   "id" : 12 , "SousCategorieLibelle": "900-1200",   "ValeurMin":  900, "Franchise" : 120 } 
+		]
+},
+
+{  "Categorie": "ordinateur",  "Plafond":  1500, "Libelle" : "Ordinateur",   "SousCategorie": 
+		[
+			{   "id" : 13 , "SousCategorieLibelle": "200-300",   "ValeurMin":  200,   "ValeurMax": 300, "Franchise" : 50 },
+			{   "id" : 14 , "SousCategorieLibelle": "300-600",   "ValeurMin":  300,   "ValeurMax": 600, "Franchise" : 60 },
+			{   "id" : 15 , "SousCategorieLibelle": "600-900",   "ValeurMin":  600,   "ValeurMax": 900, "Franchise" : 90 },
+			{   "id" : 16 , "SousCategorieLibelle": "900-1200",   "ValeurMin":  900,   "ValeurMax": 1200, "Franchise" : 100 },
+			{   "id" : 17 , "SousCategorieLibelle": "1200-1500",   "ValeurMin":  1200, "Franchise" : 150 } 
+		]
+},
+
+{  "Categorie": "appareil-photo",  "Plafond":  1500, "Libelle" : "Appareil Photo", "SousCategorie": 
+		[
+			{   "id" : 18 , "SousCategorieLibelle": "100-300",   "ValeurMin":  100,   "ValeurMax": 300, "Franchise" : 50 },
+			{   "id" : 19 , "SousCategorieLibelle": "300-600",   "ValeurMin":  300,   "ValeurMax": 600, "Franchise" : 60 },
+			{   "id" : 20 , "SousCategorieLibelle": "600-900",   "ValeurMin":  600,   "ValeurMax": 900, "Franchise" : 90 },
+			{   "id" : 21 , "SousCategorieLibelle": "900-1200",   "ValeurMin":  900,   "ValeurMax": 1200, "Franchise" : 100 },
+			{   "id" : 22 , "SousCategorieLibelle": "1200-1500",   "ValeurMin":  1200, "Franchise" : 150 } 
+		]
+},
+
+{  "Categorie": "consoles",  "Plafond":  500, "Libelle" : "Consoles",   "SousCategorie": 
+		[
+			{   "id" : 23 , "SousCategorieLibelle": "100-250",   "ValeurMin":  100,   "ValeurMax": 250, "Franchise" : 40 },
+			{   "id" : 24 , "SousCategorieLibelle": "250-500",   "ValeurMin":  500, "Franchise" : 60 } 
+		]
+},
+
+{  "Categorie": "sport",  "Plafond":  1000, "Libelle" : "Sport",   "SousCategorie": 
+		[
+			{   "id" : 25 , "SousCategorieLibelle": "100-250",   "ValeurMin":  100,   "ValeurMax": 250, "Franchise" : 30 },
+			{   "id" : 26 , "SousCategorieLibelle": "250-500",   "ValeurMin":  250,   "ValeurMax": 500, "Franchise" : 50 },
+			{   "id" : 27 , "SousCategorieLibelle": "500-750",   "ValeurMin":  500,   "ValeurMax": 750, "Franchise" : 90 },
+			{   "id" : 28 , "SousCategorieLibelle": "750-1000",   "ValeurMin":  750, "Franchise" : 120 } 
+		]
+},
+
+{  "Categorie": "guitare",  "Plafond":  2000, "Libelle" : "Guitare",   "SousCategorie": 
+		[
+			{   "id" : 29 , "SousCategorieLibelle": "100-250",   "ValeurMin":  100,   "ValeurMax": 250, "Franchise" : 30 },
+			{   "id" : 30 , "SousCategorieLibelle": "250-500",   "ValeurMin":  250,   "ValeurMax": 500, "Franchise" : 50 },
+			{   "id" : 31 , "SousCategorieLibelle": "500-750",   "ValeurMin":  500,   "ValeurMax": 750, "Franchise" : 90 },
+			{   "id" : 32 , "SousCategorieLibelle": "750-1000",   "ValeurMin":  750,   "ValeurMax": 1000, "Franchise" : 120 },
+			{   "id" : 33 , "SousCategorieLibelle": "1000-1250",   "ValeurMin":  1000,   "ValeurMax": 1250, "Franchise" : 135 },
+			{   "id" : 34 , "SousCategorieLibelle": "1250-1500",   "ValeurMin":  1250,   "ValeurMax": 1500, "Franchise" : 150 },
+			{   "id" : 35 , "SousCategorieLibelle": "1500-2000",   "ValeurMin":  1500, "Franchise" : 150 } 
+		]
+},
+
+{  "Categorie": "tablette",  "Plafond":  1000, "Libelle" : "Tablette",   "SousCategorie": 
+		[
+			{   "id" : 36 , "SousCategorieLibelle": "100-250",   "ValeurMin":  100,   "ValeurMax": 250, "Franchise" : 30 },
+			{   "id" : 37 , "SousCategorieLibelle": "250-500",   "ValeurMin":  250,   "ValeurMax": 500, "Franchise" : 50 },
+			{   "id" : 38 , "SousCategorieLibelle": "500-750",   "ValeurMin":  500,   "ValeurMax": 750, "Franchise" : 90 },
+			{   "id" : 39 , "SousCategorieLibelle": "750-1000",   "ValeurMin":  750,   "ValeurMax": 1000, "Franchise" : 120 },
+			{   "id" : 40 , "SousCategorieLibelle": "1000-1250",   "ValeurMin":  1000,   "ValeurMax": 1250, "Franchise" : 135 },
+			{   "id" : 41 , "SousCategorieLibelle": "1250-1500",   "ValeurMin":  1250,   "ValeurMax": 1500, "Franchise" : 150 },
+			{   "id" : 42 , "SousCategorieLibelle": "1500-2000",   "ValeurMin":  1500, "Franchise" : 150 } 
+		]
+})
+
+		
+		
+		
+			
