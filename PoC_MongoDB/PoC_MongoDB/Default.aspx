@@ -28,10 +28,20 @@
                     <span class="label-input100">Objet à assurer *</span>
                     <div>
 
-                        <asp:DropDownList ID="ddlcategorie" runat="server" class="js-select2" name="service">
+                        <asp:DropDownList ID="ddlcategorie" AutoPostBack="true" runat="server" class="js-select2" name="service" OnSelectedIndexChanged="ddlcategorie_SelectedIndexChanged">
                         </asp:DropDownList>
 
-                        <div class="dropDownSelect2"></div>
+                     <div class="dropDownSelect2"></div>
+                    </div>
+                </div>
+
+                <div class="wrap-input100 input100-select bg1">
+                    <span class="label-input100">Valeur de l'objet :</span>
+                    <div>
+
+
+                        <asp:TextBox runat="server" ID="txtTest" Text="test"/>
+                      
                     </div>
                 </div>
                 <div class="container-contact100-form-btn">
