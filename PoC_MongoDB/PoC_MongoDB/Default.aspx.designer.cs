@@ -22,12 +22,20 @@ namespace PoC_MongoDB {
         protected global::System.Web.UI.WebControls.DropDownList ddlcategorie;
         
         /// <summary>
+<<<<<<< HEAD
         /// Contrôle txtTest.
+=======
+        /// Contrôle txtValeur.
+>>>>>>> 23baa8b5f478089e04bd1b4a780d1603219a63d5
         /// </summary>
         /// <remarks>
         /// Champ généré automatiquement.
         /// Pour modifier, déplacez la déclaration de champ du fichier de concepteur dans le fichier code-behind.
         /// </remarks>
+<<<<<<< HEAD
         protected global::System.Web.UI.WebControls.TextBox txtTest;
+=======
+        protected global::System.Web.UI.WebControls.TextBox txtValeur;
+>>>>>>> 23baa8b5f478089e04bd1b4a780d1603219a63d5
     }
 }

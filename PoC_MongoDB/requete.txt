@@ -1,0 +1,657 @@
+
+
+db.categories.aggregate([
+   {
+     $lookup:
+       {
+         from: "tarifs",
+         localField: "SousCategorie.id",
+         foreignField: "fk_categorie",
+         as: "inventory_docs"
+       }
+  },
+  {
+      $match: { "SousCategorie.id": 1 }
+   }
+])
+
+
+
+
+// SELECT * FROM tarifs WHERE Categorie = smartphone
+using MongoDB.Bson;
+using MongoDB.Driver;
+using System;
+using System.Threading.Tasks;
+
+namespace MongoDBQuery
+{
+    class Program
+    {
+        static async Task _Main()
+        {
+            
+            IMongoClient client = new MongoClient("mongodb://host:port/");
+            IMongoDatabase database = client.GetDatabase("cbien");
+            IMongoCollection<BsonDocument> collection = database.GetCollection<BsonDocument>("tarifs");
+            
+            // Created with Studio 3T, the IDE for MongoDB - https://studio3t.com/
+            
+            BsonDocument filter = new BsonDocument();
+            filter.Add("Categorie", "smartphone");
+            
+            using (var cursor = await collection.FindAsync(filter))
+            {
+                while (await cursor.MoveNextAsync())
+                {
+                    var batch = cursor.Current;
+                    foreach (BsonDocument document in batch)
+                    {
+                        Console.WriteLine(document.ToJson());
+                    }
+                }
+            }
+        }
+        
+        static void Main(string[] args)
+        {
+            _Main().Wait();
+        }
+    }
+}
+
+
+
+
+// SELECT * FROM tarifs
+using MongoDB.Bson;
+using MongoDB.Driver;
+using System;
+using System.Threading.Tasks;
+
+namespace MongoDBQuery
+{
+    class Program
+    {
+        static async Task _Main()
+        {
+            
+            IMongoClient client = new MongoClient("mongodb://host:port/");
+            IMongoDatabase database = client.GetDatabase("cbien");
+            IMongoCollection<BsonDocument> collection = database.GetCollection<BsonDocument>("tarifs");
+            
+            // Created with Studio 3T, the IDE for MongoDB - https://studio3t.com/
+            
+            BsonDocument filter = new BsonDocument();
+            
+            using (var cursor = await collection.FindAsync(filter))
+            {
+                while (await cursor.MoveNextAsync())
+                {
+                    var batch = cursor.Current;
+                    foreach (BsonDocument document in batch)
+                    {
+                        Console.WriteLine(document.ToJson());
+                    }
+                }
+            }
+        }
+        
+        static void Main(string[] args)
+        {
+            _Main().Wait();
+        }
+    }
+}
+
+
+
+// SELECT * FROM tarifs WHERE Categorie LIKE 'smart%'
+using MongoDB.Bson;
+using MongoDB.Driver;
+using System;
+using System.Threading.Tasks;
+
+namespace MongoDBQuery
+{
+    class Program
+    {
+        static async Task _Main()
+        {
+            
+            IMongoClient client = new MongoClient("mongodb://host:port/");
+            IMongoDatabase database = client.GetDatabase("cbien");
+            IMongoCollection<BsonDocument> collection = database.GetCollection<BsonDocument>("tarifs");
+            
+            // Created with Studio 3T, the IDE for MongoDB - https://studio3t.com/
+            
+            BsonDocument filter = new BsonDocument();
+            filter.Add("Categorie", new BsonRegularExpression("^smart.*$", "i"));
+            
+            using (var cursor = await collection.FindAsync(filter))
+            {
+                while (await cursor.MoveNextAsync())
+                {
+                    var batch = cursor.Current;
+                    foreach (BsonDocument document in batch)
+                    {
+                        Console.WriteLine(document.ToJson());
+                    }
+                }
+            }
+        }
+        
+        static void Main(string[] args)
+        {
+            _Main().Wait();
+        }
+    }
+}
+
+
+
+// SELECT * FROM tarifs WHERE Categorie LIKE 'smart%' OR Categorie = 'tablette'
+using MongoDB.Bson;
+using MongoDB.Driver;
+using System;
+using System.Threading.Tasks;
+
+namespace MongoDBQuery
+{
+    class Program
+    {
+        static async Task _Main()
+        {
+            
+            IMongoClient client = new MongoClient("mongodb://host:port/");
+            IMongoDatabase database = client.GetDatabase("cbien");
+            IMongoCollection<BsonDocument> collection = database.GetCollection<BsonDocument>("tarifs");
+            
+            // Created with Studio 3T, the IDE for MongoDB - https://studio3t.com/
+            
+            BsonDocument filter = new BsonDocument();
+            filter.Add("$or", new BsonArray()
+                    .Add(new BsonDocument()
+                            .Add("Categorie", new BsonRegularExpression("^smart.*$", "i"))
+                    )
+                    .Add(new BsonDocument()
+                            .Add("Categorie", "tablette")
+                    )
+            );
+            
+            using (var cursor = await collection.FindAsync(filter))
+            {
+                while (await cursor.MoveNextAsync())
+                {
+                    var batch = cursor.Current;
+                    foreach (BsonDocument document in batch)
+                    {
+                        Console.WriteLine(document.ToJson());
+                    }
+                }
+            }
+        }
+        
+        static void Main(string[] args)
+        {
+            _Main().Wait();
+        }
+    }
+}
+
+
+// SELECT * FROM tarifs WHERE SousCategorie.ValeurMin = 500
+using MongoDB.Bson;
+using MongoDB.Driver;
+using System;
+using System.Threading.Tasks;
+
+namespace MongoDBQuery
+{
+    class Program
+    {
+        static async Task _Main()
+        {
+            
+            IMongoClient client = new MongoClient("mongodb://host:port/");
+            IMongoDatabase database = client.GetDatabase("cbien");
+            IMongoCollection<BsonDocument> collection = database.GetCollection<BsonDocument>("tarifs");
+            
+            // Created with Studio 3T, the IDE for MongoDB - https://studio3t.com/
+            
+            BsonDocument filter = new BsonDocument();
+            filter.Add("SousCategorie.ValeurMin", new BsonInt64(500L));
+            
+            using (var cursor = await collection.FindAsync(filter))
+            {
+                while (await cursor.MoveNextAsync())
+                {
+                    var batch = cursor.Current;
+                    foreach (BsonDocument document in batch)
+                    {
+                        Console.WriteLine(document.ToJson());
+                    }
+                }
+            }
+        }
+        
+        static void Main(string[] args)
+        {
+            _Main().Wait();
+        }
+    }
+}
+
+
+
+//SELECT * FROM tarifs WHERE  Categorie LIKE 'smart%' AND (Categorie = 'tablette' OR SousCategorie.ValeurMin = 500)
+using MongoDB.Bson;
+using MongoDB.Driver;
+using System;
+using System.Threading.Tasks;
+
+namespace MongoDBQuery
+{
+    class Program
+    {
+        static async Task _Main()
+        {
+            
+            IMongoClient client = new MongoClient("mongodb://host:port/");
+            IMongoDatabase database = client.GetDatabase("cbien");
+            IMongoCollection<BsonDocument> collection = database.GetCollection<BsonDocument>("tarifs");
+            
+            // Created with Studio 3T, the IDE for MongoDB - https://studio3t.com/
+            
+            BsonDocument filter = new BsonDocument();
+            filter.Add("Categorie", new BsonRegularExpression("^smart.*$", "i"));
+            filter.Add("$or", new BsonArray()
+                    .Add(new BsonDocument()
+                            .Add("Categorie", "tablette")
+                    )
+                    .Add(new BsonDocument()
+                            .Add("SousCategorie.ValeurMin", new BsonInt64(500L))
+                    )
+            );
+            
+            using (var cursor = await collection.FindAsync(filter))
+            {
+                while (await cursor.MoveNextAsync())
+                {
+                    var batch = cursor.Current;
+                    foreach (BsonDocument document in batch)
+                    {
+                        Console.WriteLine(document.ToJson());
+                    }
+                }
+            }
+        }
+        
+        static void Main(string[] args)
+        {
+            _Main().Wait();
+        }
+    }
+}
+
+
+
+// SELECT * FROM tarifs WHERE  Categorie LIKE 'smart%' OR (Categorie = 'tablette' AND SousCategorie.ValeurMin = 500)
+using MongoDB.Bson;
+using MongoDB.Driver;
+using System;
+using System.Threading.Tasks;
+
+namespace MongoDBQuery
+{
+    class Program
+    {
+        static async Task _Main()
+        {
+            
+            IMongoClient client = new MongoClient("mongodb://host:port/");
+            IMongoDatabase database = client.GetDatabase("cbien");
+            IMongoCollection<BsonDocument> collection = database.GetCollection<BsonDocument>("tarifs");
+            
+            // Created with Studio 3T, the IDE for MongoDB - https://studio3t.com/
+            
+            BsonDocument filter = new BsonDocument();
+            filter.Add("$or", new BsonArray()
+                    .Add(new BsonDocument()
+                            .Add("Categorie", new BsonRegularExpression("^smart.*$", "i"))
+                    )
+                    .Add(new BsonDocument()
+                            .Add("$and", new BsonArray()
+                                    .Add(new BsonDocument()
+                                            .Add("Categorie", "tablette")
+                                    )
+                                    .Add(new BsonDocument()
+                                            .Add("SousCategorie.ValeurMin", new BsonInt64(500L))
+                                    )
+                            )
+                    )
+            );
+            
+            using (var cursor = await collection.FindAsync(filter))
+            {
+                while (await cursor.MoveNextAsync())
+                {
+                    var batch = cursor.Current;
+                    foreach (BsonDocument document in batch)
+                    {
+                        Console.WriteLine(document.ToJson());
+                    }
+                }
+            }
+        }
+        
+        static void Main(string[] args)
+        {
+            _Main().Wait();
+        }
+    }
+}
+
+
+// SELECT * FROM tarifs WHERE  Categorie LIKE 'smart%' OR Categorie = 'tablette' 
+using MongoDB.Bson;
+using MongoDB.Driver;
+using System;
+using System.Threading.Tasks;
+
+namespace MongoDBQuery
+{
+    class Program
+    {
+        static async Task _Main()
+        {
+            
+            IMongoClient client = new MongoClient("mongodb://host:port/");
+            IMongoDatabase database = client.GetDatabase("cbien");
+            IMongoCollection<BsonDocument> collection = database.GetCollection<BsonDocument>("tarifs");
+            
+            // Created with Studio 3T, the IDE for MongoDB - https://studio3t.com/
+            
+            BsonDocument filter = new BsonDocument();
+            filter.Add("$or", new BsonArray()
+                    .Add(new BsonDocument()
+                            .Add("Categorie", new BsonRegularExpression("^smart.*$", "i"))
+                    )
+                    .Add(new BsonDocument()
+                            .Add("Categorie", "tablette")
+                    )
+            );
+            
+            using (var cursor = await collection.FindAsync(filter))
+            {
+                while (await cursor.MoveNextAsync())
+                {
+                    var batch = cursor.Current;
+                    foreach (BsonDocument document in batch)
+                    {
+                        Console.WriteLine(document.ToJson());
+                    }
+                }
+            }
+        }
+        
+        static void Main(string[] args)
+        {
+            _Main().Wait();
+        }
+    }
+}
+
+
+// SELECT * FROM tarifs WHERE  Categorie LIKE 'smart%' AND Categorie = 'tablette' 
+using MongoDB.Bson;
+using MongoDB.Driver;
+using System;
+using System.Threading.Tasks;
+
+namespace MongoDBQuery
+{
+    class Program
+    {
+        static async Task _Main()
+        {
+            
+            IMongoClient client = new MongoClient("mongodb://host:port/");
+            IMongoDatabase database = client.GetDatabase("cbien");
+            IMongoCollection<BsonDocument> collection = database.GetCollection<BsonDocument>("tarifs");
+            
+            // Created with Studio 3T, the IDE for MongoDB - https://studio3t.com/
+            
+            BsonDocument filter = new BsonDocument();
+            filter.Add("$and", new BsonArray()
+                    .Add(new BsonDocument()
+                            .Add("Categorie", new BsonRegularExpression("^smart.*$", "i"))
+                    )
+                    .Add(new BsonDocument()
+                            .Add("Categorie", "tablette")
+                    )
+            );
+            
+            using (var cursor = await collection.FindAsync(filter))
+            {
+                while (await cursor.MoveNextAsync())
+                {
+                    var batch = cursor.Current;
+                    foreach (BsonDocument document in batch)
+                    {
+                        Console.WriteLine(document.ToJson());
+                    }
+                }
+            }
+        }
+        
+        static void Main(string[] args)
+        {
+            _Main().Wait();
+        }
+    }
+}
+
+
+
+// SELECT * FROM tarifs WHERE  Categorie IN ('smartphone', 'console')
+using MongoDB.Bson;
+using MongoDB.Driver;
+using System;
+using System.Threading.Tasks;
+
+namespace MongoDBQuery
+{
+    class Program
+    {
+        static async Task _Main()
+        {
+            
+            IMongoClient client = new MongoClient("mongodb://host:port/");
+            IMongoDatabase database = client.GetDatabase("cbien");
+            IMongoCollection<BsonDocument> collection = database.GetCollection<BsonDocument>("tarifs");
+            
+            // Created with Studio 3T, the IDE for MongoDB - https://studio3t.com/
+            
+            BsonDocument filter = new BsonDocument();
+            filter.Add("Categorie", new BsonDocument()
+                    .Add("$in", new BsonArray()
+                            .Add("smartphone")
+                            .Add("console")
+                    )
+            );
+            
+            using (var cursor = await collection.FindAsync(filter))
+            {
+                while (await cursor.MoveNextAsync())
+                {
+                    var batch = cursor.Current;
+                    foreach (BsonDocument document in batch)
+                    {
+                        Console.WriteLine(document.ToJson());
+                    }
+                }
+            }
+        }
+        
+        static void Main(string[] args)
+        {
+            _Main().Wait();
+        }
+    }
+}
+
+
+
+// SELECT * FROM tarifs WHERE  SousCategorie.ValeurMin BETWEEN 0 AND 1000
+using MongoDB.Bson;
+using MongoDB.Driver;
+using System;
+using System.Threading.Tasks;
+
+namespace MongoDBQuery
+{
+    class Program
+    {
+        static async Task _Main()
+        {
+            
+            IMongoClient client = new MongoClient("mongodb://host:port/");
+            IMongoDatabase database = client.GetDatabase("cbien");
+            IMongoCollection<BsonDocument> collection = database.GetCollection<BsonDocument>("tarifs");
+            
+            // Created with Studio 3T, the IDE for MongoDB - https://studio3t.com/
+            
+            BsonDocument filter = new BsonDocument();
+            filter.Add("SousCategorie.ValeurMin", new BsonDocument()
+                    .Add("$gte", new BsonInt64(0L))
+                    .Add("$lte", new BsonInt64(1000L))
+            );
+            
+            using (var cursor = await collection.FindAsync(filter))
+            {
+                while (await cursor.MoveNextAsync())
+                {
+                    var batch = cursor.Current;
+                    foreach (BsonDocument document in batch)
+                    {
+                        Console.WriteLine(document.ToJson());
+                    }
+                }
+            }
+        }
+        
+        static void Main(string[] args)
+        {
+            _Main().Wait();
+        }
+    }
+}
+
+
+
+// 
+SELECT count(*) FROM tarifs
+using MongoDB.Bson;
+using MongoDB.Driver;
+using System;
+using System.Threading.Tasks;
+
+namespace MongoDBQuery
+{
+    class Program
+    {
+        static async Task _Main()
+        {
+            
+            IMongoClient client = new MongoClient("mongodb://host:port/");
+            IMongoDatabase database = client.GetDatabase("cbien");
+            IMongoCollection<BsonDocument> collection = database.GetCollection<BsonDocument>("tarifs");
+            
+            // Created with Studio 3T, the IDE for MongoDB - https://studio3t.com/
+            
+            var options = new AggregateOptions() {
+                
+            };
+            
+            PipelineDefinition<BsonDocument, BsonDocument> pipeline = new BsonDocument[]
+            {
+                new BsonDocument("$group", new BsonDocument()
+                        .Add("_id", new BsonDocument())
+                        .Add("COUNT(*)", new BsonDocument()
+                                .Add("$sum", 1)
+                        )), 
+                new BsonDocument("$project", new BsonDocument()
+                        .Add("_id", 0)
+                        .Add("COUNT(*)", "$COUNT(*)"))
+            };
+            
+            using (var cursor = await collection.AggregateAsync(pipeline, options))
+            {
+                while (await cursor.MoveNextAsync())
+                {
+                    var batch = cursor.Current;
+                    foreach (BsonDocument document in batch)
+                    {
+                        Console.WriteLine(document.ToJson());
+                    }
+                }
+            }
+        }
+        
+        static void Main(string[] args)
+        {
+            _Main().Wait();
+        }
+    }
+}
+
+
+// SELECT Categorie,SousCategorie.GarantieLibelle  FROM tarifs
+using MongoDB.Bson;
+using MongoDB.Driver;
+using System;
+using System.Threading.Tasks;
+
+namespace MongoDBQuery
+{
+    class Program
+    {
+        static async Task _Main()
+        {
+            
+            IMongoClient client = new MongoClient("mongodb://host:port/");
+            IMongoDatabase database = client.GetDatabase("cbien");
+            IMongoCollection<BsonDocument> collection = database.GetCollection<BsonDocument>("tarifs");
+            
+            // Created with Studio 3T, the IDE for MongoDB - https://studio3t.com/
+            
+            BsonDocument filter = new BsonDocument();
+            BsonDocument projection = new BsonDocument();
+            projection.Add("Categorie", 1);
+            projection.Add("SousCategorie.GarantieLibelle", 1);
+            
+            var options = new FindOptions<BsonDocument>()
+            {
+                Projection = projection
+            };
+            
+            using (var cursor = await collection.FindAsync(filter, options))
+            {
+                while (await cursor.MoveNextAsync())
+                {
+                    var batch = cursor.Current;
+                    foreach (BsonDocument document in batch)
+                    {
+                        Console.WriteLine(document.ToJson());
+                    }
+                }
+            }
+        }
+        
+        static void Main(string[] args)
+        {
+            _Main().Wait();
+        }
+    }
+}
